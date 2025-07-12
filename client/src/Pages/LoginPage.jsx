@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
 
         const [userData, setUserData] = useState({
-            user: '',
+            email: '',
             pass: ''
         })
         const handleChange = (e) => {
@@ -24,11 +24,11 @@ const LoginPage = () => {
           <div className="flex flex-col gap-5">
             <div className="flex items-center border border-black rounded-full px-5 py-2 bg-white/5">
               <input
-                type="text"
-                name="user"
-                value={userData.user}
+                type="email"
+                name="email"
+                value={userData.email}
                 onChange={handleChange}
-                placeholder="Enter username"
+                placeholder="Enter email"
                 required
                 className="bg-transparent outline-none flex-1 text-black"
               />

@@ -29,18 +29,16 @@ const routes =  createBrowserRouter([
                 element: <Home />
             },
             {
-                path: '/profile',
+                path: ':id',
+                element: <SwapRequestDetails />
+            },
+            {
+                path: 'profile',
                 element: <Profile />
             },
             {
-                path: '/swap-request',
+                path: 'swap-request',
                 element: <SwapRequest />,
-                children: [
-                    {
-                        path: ':id',
-                        element: <SwapRequestDetails />
-                    }
-                ]
             }
         ]
     }
