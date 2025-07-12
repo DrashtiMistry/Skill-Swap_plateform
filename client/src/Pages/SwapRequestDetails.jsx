@@ -1,26 +1,65 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { User } from 'lucide-react'
 
 const SwapRequestModal = () => {
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef(null);
   const { id } = useParams()
+  const [formData, setFormData] = useState({
+    offeredSkill: '',
+    wantedSkill: '',
+    message: ''
+  });
+
   const [user, setUser] = useState({})
   const url = import.meta.env.VITE_BACKEND_URL
   const navigate = useNavigate()
-  const profile = {
-    name: "Marc Demo",
-    skillsOffered: ["Graphic Design", "Video Editing"],
-    skillsWanted: ["Python", "Manager"],
-    profilePhoto: "https://via.placeholder.com/100",
-  };
+  // const profile = {
+  //   name: "Marc Demo",
+  //   skillsOffered: ["Graphic Design", "Video Editing"],
+  //   skillsWanted: ["Python", "Manager"],
+  //   profilePhoto: "https://via.placeholder.com/100",
+  // };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Send data to backend here
+    const token = localStorage.getItem("token")
+    try {
+      const res = await fetch(`${url}/api/swaps/`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          "Authorization": token
+        },
+        body: JSON.stringify({
+          toUser: id,
+          offeredSkill: formData.offeredSkill,
+          wantedSkill: formData.wantedSkill
+        })
+      })
+      const result = await res.json()
+      if(!res.ok){
+        toast.error("Please login")
+        navigate('/login')
+      } else{
+        toast.success("Requested successfully")
+      }
+    } catch (error) {
+      console.log(error);
+    }
     setShowModal(false);
   };
+
+  const handleChange = (e) => {
+  const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
 
   const fetchDetails = async () => {
     const token = localStorage.getItem("token")
@@ -97,13 +136,15 @@ const SwapRequestModal = () => {
             </div>
           </div>
 
-          <div className="w-24 h-24 rounded-full overflow-hidden border border-gray-300">
-            <img
-              src={user.profilePhoto || "https://via.placeholder.com/100"}
-              className="w-full h-full object-cover"
-              alt="Profile"
-            />
-          </div>
+          {
+              user.profilePhoto ? <div className="w-24 h-24 rounded-full border-2 border-indigo-500">
+                                    <img src={user.profilePhoto} alt="" className="w-full h-full rounded-full object-cover object-top" />
+                                </div>
+                  : 
+                  <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center text-sm">
+                    <User />
+                  </div>
+            }
         </div>
       </div>
       {showModal && (
@@ -116,7 +157,7 @@ const SwapRequestModal = () => {
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div>
                 <label className="block text-sm font-medium mb-1">Your Offered Skill</label>
-                <select className="w-full border border-gray-400 rounded-md p-2" required>
+                <select name="offeredSkill" value={formData.offeredSkill} onChange={handleChange} className="w-full border border-gray-400 rounded-md p-2" required>
                   {user.skillsOffered.map((skill, idx) => (
                     <option key={idx} value={skill}>
                       {skill}
@@ -127,7 +168,7 @@ const SwapRequestModal = () => {
 
               <div>
                 <label className="block text-sm font-medium mb-1">Their Wanted Skill</label>
-                <select className="w-full border border-gray-400 rounded-md p-2" required>
+                <select name="wantedSkill" value={formData.wantedSkill} onChange={handleChange} className="w-full border border-gray-400 rounded-md p-2" required>
                   {user.skillsWanted.map((skill, idx) => (
                     <option key={idx} value={skill}>
                       {skill}

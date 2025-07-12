@@ -34,7 +34,7 @@
 
 
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
@@ -67,7 +67,10 @@ const Navbar = () => {
       <div className="flex gap-3 items-center">
         {isLoggedIn ? (
           <>
-            <span className="text-gray-700 text-sm">Hi, {username}</span>
+            <div className="relative group cursor-pointer pb-0.5">
+              <NavLink to={'/profile'}>Profile</NavLink>
+              <span className='absolute bottom-0 left-0 h-[2px] origin-center bg-black w-full scale-x-0 group-hover:scale-x-100 duration-300'></span>
+            </div>
             <button onClick={handleLogout} className={buttonStyle()}>
               Logout
             </button>
