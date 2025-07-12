@@ -30,7 +30,7 @@ const routes =  createBrowserRouter([
         children: [
             {
                 path: '',
-                element: <Home />
+                element: <HomePage />
             },
             {
                 path: '/profile',
