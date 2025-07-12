@@ -1,5 +1,6 @@
 import { User } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // const users = [
@@ -30,6 +31,7 @@ const HomePage = () => {
 
     const [users, setUsers] = useState([])
     const url = import.meta.env.VITE_BACKEND_URL
+    const navigate = useNavigate()
 
     const fetchData = async () => {
         try {
@@ -42,7 +44,11 @@ const HomePage = () => {
                     "Authorization": `${token}`
                 }
              })
-             
+             if(!res.ok){
+              toast.error("Please login")
+              navigate('/login')
+              return
+             }
              const result = await res.json()
              setUsers(result)
              
@@ -59,7 +65,7 @@ const HomePage = () => {
 
   return (
       <>
-      <div className="min-h-screen mt-[60px] max-w-5xl mx-auto text-black px-4 py-6">
+      <div className="min-h-screen mt-[100px] max-w-5xl mx-auto text-black px-4 py-6">
 
       {/* Search and filter */}
       <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
@@ -135,7 +141,7 @@ const HomePage = () => {
             </div>
 
             {/* Request Button */}
-            <button className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700">
+            <button className="bg-teal-600 cursor-pointer text-white px-4 py-2 rounded hover:bg-teal-700" onClick={()=>navigate(`/${user._id}`)}>
               Request
             </button>
           </div>

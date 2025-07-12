@@ -3,9 +3,7 @@ import { User, LockKeyhole, Mail } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-
 const RegisterPage = () => {
-
     const navigate = useNavigate()
     const url = import.meta.env.VITE_BACKEND_URL
     const [userData, setUserData] = useState({
@@ -44,15 +42,11 @@ const RegisterPage = () => {
         }
     }
 
-    
-
-
   return (
     <div className="w-screen h-screen flex items-center justify-center text-black">
       <div className="p-12 bg-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)] rounded-xl">
         <div className="flex flex-col gap-5">
           <h2 className="text-3xl text-center mb-4 font-bold">Signup</h2>
-
           <div className="flex flex-col gap-5">
             <div className="flex items-center border border-black rounded-full px-5 py-2 bg-white/5">
               <input
@@ -88,7 +82,7 @@ const RegisterPage = () => {
                 onChange={handleChange}
                 placeholder="Enter password"
                 required
-                className="bg-transparent outline-none flex-1 text-black "
+                className="bg-transparent outline-none flex-1 text-black"
               />
               <LockKeyhole />
             </div>
@@ -100,11 +94,19 @@ const RegisterPage = () => {
           >
             Submit
           </button>
-          <p className='text-center text-[12px]'>Already have an account? <span className='text-blue-700 underline hover:cursor-pointer' onClick={()=>navigate('/login')}>Login</span></p>
+          <p className="text-center text-[12px]">
+            Already have an account?{" "}
+            <span
+              className="text-blue-700 underline hover:cursor-pointer"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </span>
+          </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RegisterPage
+export default RegisterPage;
