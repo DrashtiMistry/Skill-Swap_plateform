@@ -28,7 +28,7 @@ const users = [
 const HomePage = () => {
   return (
       <>
-      <div className="min-h-screen mt-[60px] max-w-5xl mx-auto text-black px-4 py-6">
+      <div className="min-h-screen mt-[100px] max-w-5xl mx-auto text-black px-4 py-6">
 
       {/* Search and filter */}
       <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">

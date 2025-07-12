@@ -32,22 +32,18 @@ const SwapRequests = () => {
   return (
     <div className="p-6 max-w-5xl mx-auto mt-20">
 
-      <div className="flex items-center gap-4 mb-6">
-        <select
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          className="border px-4 py-2 rounded"
-        >
-          <option>All</option>
-          <option>Pending</option>
-          <option>Rejected</option>
+      <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
+        <select className="border border-gray-400 px-3 py-2 rounded w-full sm:w-auto">
+          <option>Availability</option>
+          <option>Online Now</option>
+          <option>Weekends</option>
         </select>
         <input
           type="text"
-          placeholder="Search"
-          className="border px-4 py-2 rounded"
+          placeholder="Search by skill or name"
+          className="border border-gray-400 px-4 py-2 rounded w-full sm:w-1/2"
         />
-        <button className="border px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">
+        <button className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800">
           Search
         </button>
       </div>
@@ -103,14 +99,6 @@ const SwapRequests = () => {
         </div>
       ))}
 
-      {/* Pagination */}
-      {/* <div className="flex justify-center gap-2 mt-6">
-        <button>{"<"}</button>
-        <button className="font-bold underline">1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>{">"}</button>
-      </div> */}
       <div className="mt-8 flex justify-center space-x-2">
         <button className="px-3 py-1 rounded border">{"<"}</button>
         {[1, 2, 3, 4, 5, 6, 7].map((num) => (
