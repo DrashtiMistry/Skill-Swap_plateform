@@ -1,3 +1,11 @@
+Team :
+Drashti Mistry
+Rudra Chauhan
+Meet Bhesara
+Asad Merchant
+
+
+
 # 🧠 Skill Swap Platform
 
 A community-driven web platform where individuals can exchange skills by connecting with others who have expertise in different domains.
@@ -38,3 +46,4 @@ A community-driven web platform where individuals can exchange skills by connect
 - ☁️ Hosted on Render
 
 ---
+video link :- https://youtu.be/iqHUN0UEe_w
