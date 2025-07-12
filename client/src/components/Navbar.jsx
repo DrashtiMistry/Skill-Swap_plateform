@@ -10,7 +10,7 @@ const Navbar = () => {
     }`;
 
   return (
-    <nav className="flex justify-between items-center bg-white shadow-md px-6 py-4 w-full position-fixed top-0">
+    <nav className="bg-white shadow-md px-6 py-4 flex justify-between items-center">
       {/* Brand Name */}
       <Link to="/" className="text-2xl font-bold text-gray-800 hover:text-gray-600 transition">
         Skill Swap Platform

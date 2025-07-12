@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 
 const users = [
   {
@@ -7,28 +6,27 @@ const users = [
     skillsOffered: ["JavaScript", "Python"],
     skillsWanted: ["Photoshop", "Graphic Designer"],
     rating: 3.9,
-    profilePhoto: "", 
+    profilePhoto: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnN8ZW58MHx8MHx8fDA%3D", 
   },
   {
     name: "Michell",
     skillsOffered: ["JavaScript", "Python"],
     skillsWanted: ["Photoshop", "Graphic Designer"],
     rating: 2.5,
-    profilePhoto: "",
+    profilePhoto: "https://images.unsplash.com/flagged/photo-1573740144655-bbb6e88fb18a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVzZXJzfGVufDB8fDB8fHww",
   },
   {
     name: "Joe Wills",
     skillsOffered: ["JavaScript", "Python"],
     skillsWanted: ["Photoshop", "Graphic Designer"],
     rating: 4.0,
-    profilePhoto: "",
+    profilePhoto: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnN8ZW58MHx8MHx8fDA%3D",
   },
 ];
 
 const HomePage = () => {
   return (
       <>
-        < Navbar />
       <div className="min-h-screen bg-gray-100 text-black px-4 py-6">
 
       {/* Search and filter */}
@@ -56,9 +54,13 @@ const HomePage = () => {
             className="bg-white rounded-xl shadow-md p-6 flex flex-col sm:flex-row items-center gap-6"
           >
             {/* Profile Photo */}
-            <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center text-sm">
+            {/* <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center text-sm">
               Profile Photo
+            </div> */}
+            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-indigo-500">
+                <img src={user.profilePhoto} alt="" />
             </div>
+
 
             {/* User Info */}
             <div className="flex-1">
