@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
 
+    const url = import.meta.env.VITE_BACKEND_URL
     const [userData, setUserData] = useState({
         user: '',
         pass: '',
@@ -15,7 +16,13 @@ const RegisterPage = () => {
         const value = e.target.value 
         setUserData((prev) => ({...prev, [name]:value}))
     }
+    const handleClick = async (e) => {
+        e.preventDefault()
+        
+    }
+
     const navigate = useNavigate()
+
 
   return (
     <div className="w-screen h-screen flex items-center justify-center text-black">
@@ -65,7 +72,7 @@ const RegisterPage = () => {
           </div>
 
           <button
-            
+            onClick={handleClick}
             className="w-full bg-black text-white uppercase font-semibold py-2 rounded-full border border-black hover:scale-105 hover:cursor-pointer hover:shadow-lg transition-all duration-300"
           >
             Submit
