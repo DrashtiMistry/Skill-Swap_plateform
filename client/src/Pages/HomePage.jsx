@@ -1,5 +1,5 @@
+import { User } from "lucide-react";
 import React from "react";
-import Navbar from "../components/Navbar";
 
 const users = [
   {
@@ -28,8 +28,7 @@ const users = [
 const HomePage = () => {
   return (
       <>
-        < Navbar />
-      <div className="min-h-screen bg-gray-100 text-black px-4 py-6">
+      <div className="min-h-screen mt-[62px] mx-auto max-w-4xl text-black px-4 py-6">
 
       {/* Search and filter */}
       <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
@@ -53,12 +52,16 @@ const HomePage = () => {
         {users.map((user, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-md p-6 flex flex-col sm:flex-row items-center gap-6"
+            className="bg-white rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.2)] p-6 flex flex-col cursor-pointer hover:-translate-y-2 duration-300 sm:flex-row items-center gap-6"
           >
             {/* Profile Photo */}
-            <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center text-sm">
-              Profile Photo
-            </div>
+            {
+              user.profilePhoto ? <img src={user.profilePhoto} className="w-24 h-24 rounded-full" alt="" /> :
+                <div className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center text-sm">
+                  <User />
+                </div>
+            }
+            
 
             {/* User Info */}
             <div className="flex-1">
