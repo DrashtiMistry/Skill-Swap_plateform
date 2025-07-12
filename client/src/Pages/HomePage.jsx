@@ -27,8 +27,9 @@ const users = [
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-gray-100 text-black px-4 py-6">
+      <>
         < Navbar />
+      <div className="min-h-screen bg-gray-100 text-black px-4 py-6">
       {/* Header */}
       {/* <header className="flex justify-between items-center bg-white shadow-md px-6 py-4 rounded-md mb-6">
         <h1 className="text-2xl font-bold">Skill Swap Platform</h1>
@@ -121,6 +122,7 @@ const HomePage = () => {
         <button className="px-3 py-1 rounded border">{">"}</button>
       </div>
     </div>
+      </>
   );
 };
 
