@@ -10,12 +10,7 @@ import Profile from './Pages/Profile.jsx'
 import SwapRequest from './Pages/SwapRequest.jsx'
 import SwapRequestDetails from './Pages/SwapRequestDetails.jsx'
 
-
 const routes =  createBrowserRouter([
-    {
-        path: '/',
-        element: <HomePage />,
-    },
     {
         path: '/signup',
         element: <RegisterPage />,
@@ -33,18 +28,16 @@ const routes =  createBrowserRouter([
                 element: <HomePage />
             },
             {
-                path: '/profile',
+                path: ':id',
+                element: <SwapRequestDetails />
+            },
+            {
+                path: 'profile',
                 element: <Profile />
             },
             {
-                path: '/swap-request',
+                path: 'swap-request',
                 element: <SwapRequest />,
-                children: [
-                    {
-                        path: ':id',
-                        element: <SwapRequestDetails />
-                    }
-                ]
             }
         ]
     }

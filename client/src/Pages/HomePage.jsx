@@ -7,7 +7,7 @@ const users = [
     skillsOffered: ["JavaScript", "Python"],
     skillsWanted: ["Photoshop", "Graphic Designer"],
     rating: 3.9,
-    profilePhoto: "", // You can replace this with image URL
+    profilePhoto: "", 
   },
   {
     name: "Michell",
@@ -30,13 +30,6 @@ const HomePage = () => {
       <>
         < Navbar />
       <div className="min-h-screen bg-gray-100 text-black px-4 py-6">
-      {/* Header */}
-      {/* <header className="flex justify-between items-center bg-white shadow-md px-6 py-4 rounded-md mb-6">
-        <h1 className="text-2xl font-bold">Skill Swap Platform</h1>
-        <button className="border border-gray-600 px-4 py-1 rounded hover:bg-gray-200">
-          Login
-        </button>
-      </header> */}
 
       {/* Search and filter */}
       <div className="flex flex-col sm:flex-row items-center gap-4 mb-6">
