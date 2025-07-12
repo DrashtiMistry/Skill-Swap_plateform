@@ -33,7 +33,7 @@ A clean, modular Node.js + Express.js backend for a Skill Swap platform, followi
 │   ├── feedbackRoutes.js
 │   └── adminRoutes.js
 │
-├── seeder/
+├── seed/
 │   └── seedAdmin.js
 │
 ├── .env
@@ -108,7 +108,7 @@ npm run dev
 
 ## 📌 Seed Admin User
 ```bash
-node seeder/seedAdmin.js
+node seed/seedAdmin.js
 ```
 **Default Credentials:**
 - Email: `admin@skillswap.com`
