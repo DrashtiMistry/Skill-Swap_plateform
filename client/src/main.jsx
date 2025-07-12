@@ -5,11 +5,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App.jsx'
 import RegisterPage from './Pages/RegisterPage.jsx'
 import LoginPage from './Pages/LoginPage.jsx'
+import HomePage from './pages/HomePage.jsx'
 import Profile from './Pages/Profile.jsx'
-import Home from './Pages/Home.jsx'
 import SwapRequest from './Pages/SwapRequest.jsx'
 import SwapRequestDetails from './Pages/SwapRequestDetails.jsx'
-
 
 const routes =  createBrowserRouter([
     {
@@ -26,7 +25,7 @@ const routes =  createBrowserRouter([
         children: [
             {
                 path: '',
-                element: <Home />
+                element: <HomePage />
             },
             {
                 path: ':id',
