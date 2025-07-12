@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { User, LockKeyhole } from 'lucide-react';
+import { User, LockKeyhole, Mail } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
 
+        const url = import.meta.env.VITE_BACKEND_URL
         const [userData, setUserData] = useState({
             email: '',
-            pass: ''
+            password: ''
         })
         const handleChange = (e) => {
             const name = e.target.name 
@@ -14,6 +16,34 @@ const LoginPage = () => {
             setUserData((prev) => ({...prev, [name]:value}))
         }
         const navigate = useNavigate()
+        const handleClick = async (e) => {            
+                e.preventDefault()
+                if(!userData.email || !userData.password){
+                    toast.error("Please fill the required details")
+                    return
+                }
+                try {
+                    const res = await fetch(`${url}/api/auth/login`, {
+                        method: "POST",
+                        body: JSON.stringify(userData),
+                        headers: {
+                            "Content-type": 'application/json'
+                        }
+                    })
+                    console.log(res);
+                    const result = await res.json()
+                    if(res.ok){
+                        toast.success("Logged in")
+                        localStorage.setItem("token", result.token)
+                        navigate('/')
+                    } else{
+                        toast.error(result.msg)
+                    }
+                } catch (error) {
+                    toast.error(error)
+                }
+            }
+        
 
    return (
     <div className="w-screen h-screen flex items-center justify-center text-black">
@@ -32,14 +62,14 @@ const LoginPage = () => {
                 required
                 className="bg-transparent outline-none flex-1 text-black"
               />
-              <User />
+            <Mail />
             </div>
 
             <div className="flex items-center border border-black rounded-full px-5 py-2 bg-white/5">
               <input
                 type="password"
-                name="pass"
-                value={userData.pass}
+                name="password"
+                value={userData.password}
                 onChange={handleChange}
                 placeholder="Enter password"
                 required
@@ -50,7 +80,7 @@ const LoginPage = () => {
           </div>
 
           <button
-            
+            onClick={handleClick}
             className="w-full bg-black text-white uppercase font-semibold py-2 rounded-full border border-black hover:scale-105 hover:cursor-pointer hover:shadow-lg transition-all duration-300"
           >
             Submit

@@ -1,31 +1,62 @@
 import { User } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-const users = [
-  {
-    name: "Marc Demo",
-    skillsOffered: ["JavaScript", "Python"],
-    skillsWanted: ["Photoshop", "Graphic Designer"],
-    rating: 3.9,
-    profilePhoto: "https://images.unsplash.com/flagged/photo-1573740144655-bbb6e88fb18a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVzZXJzfGVufDB8fDB8fHww", 
-  },
-  {
-    name: "Michell",
-    skillsOffered: ["JavaScript", "Python"],
-    skillsWanted: ["Photoshop", "Graphic Designer"],
-    rating: 2.5,
-    profilePhoto: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnN8ZW58MHx8MHx8fDA%3D",
-  },
-  {
-    name: "Joe Wills",
-    skillsOffered: ["JavaScript", "Python"],
-    skillsWanted: ["Photoshop", "Graphic Designer"],
-    rating: 4.0,
-    profilePhoto: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnN8ZW58MHx8MHx8fDA%3D",
-  },
-];
+// const users = [
+//   {
+//     name: "Marc Demo",
+//     skillsOffered: ["JavaScript", "Python"],
+//     skillsWanted: ["Photoshop", "Graphic Designer"],
+//     rating: 3.9,
+//     profilePhoto: "https://images.unsplash.com/flagged/photo-1573740144655-bbb6e88fb18a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHVzZXJzfGVufDB8fDB8fHww", 
+//   },
+//   {
+//     name: "Michell",
+//     skillsOffered: ["JavaScript", "Python"],
+//     skillsWanted: ["Photoshop", "Graphic Designer"],
+//     rating: 2.5,
+//     profilePhoto: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnN8ZW58MHx8MHx8fDA%3D",
+//   },
+//   {
+//     name: "Joe Wills",
+//     skillsOffered: ["JavaScript", "Python"],
+//     skillsWanted: ["Photoshop", "Graphic Designer"],
+//     rating: 4.0,
+//     profilePhoto: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnN8ZW58MHx8MHx8fDA%3D",
+//   },
+// ];
 
 const HomePage = () => {
+
+    const [users, setUsers] = useState([])
+    const url = import.meta.env.VITE_BACKEND_URL
+
+    const fetchData = async () => {
+        try {
+            const token = localStorage.getItem("token")
+            console.log(token);
+            
+             const res = await fetch(`${url}/api/users/`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `${token}`
+                }
+             })
+             
+             const result = await res.json()
+             setUsers(result)
+             
+             
+        } catch (error) {
+            console.log(error);
+            toast.error("Something went wrong")
+        }
+    }
+
+    useEffect(() => {
+       fetchData()
+    }, [])
+
   return (
       <>
       <div className="min-h-screen mt-[60px] max-w-5xl mx-auto text-black px-4 py-6">

@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { User, LockKeyhole, Mail } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const RegisterPage = () => {
 
+    const navigate = useNavigate()
     const url = import.meta.env.VITE_BACKEND_URL
     const [userData, setUserData] = useState({
-        user: '',
-        pass: '',
+        name: '',
+        password: '',
         email: ''
     })
     const handleChange = (e) => {
@@ -18,10 +20,31 @@ const RegisterPage = () => {
     }
     const handleClick = async (e) => {
         e.preventDefault()
-        
+        if(!userData.email || !userData.name || !userData.password){
+            toast.error("Please fill the required details")
+            return
+        }
+        try {
+            const res = await fetch(`${url}/api/auth/register`, {
+                method: "POST",
+                body: JSON.stringify(userData),
+                headers: {
+                    "Content-type": 'application/json'
+                }
+            })
+            const result = await res.json()
+            if(res.ok){
+                toast.success(result.msg)
+                navigate('/login')
+            } else{
+                toast.error(result.msg)
+            }
+        } catch (error) {
+            toast.error(error)
+        }
     }
 
-    const navigate = useNavigate()
+    
 
 
   return (
@@ -34,8 +57,8 @@ const RegisterPage = () => {
             <div className="flex items-center border border-black rounded-full px-5 py-2 bg-white/5">
               <input
                 type="text"
-                name="user"
-                value={userData.user}
+                name="name"
+                value={userData.name}
                 onChange={handleChange}
                 placeholder="Enter username"
                 required
@@ -60,8 +83,8 @@ const RegisterPage = () => {
             <div className="flex items-center border border-black rounded-full px-5 py-2 bg-white/5">
               <input
                 type="password"
-                name="pass"
-                value={userData.pass}
+                name="password"
+                value={userData.password}
                 onChange={handleChange}
                 placeholder="Enter password"
                 required
