@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/:id', protect, getProfile);
 router.patch('/:id', protect, updateProfile);
-router.get('/', protect, browseUsers);
+router.get('/', browseUsers);
 router.patch('/:id/togglePublic', protect, togglePublic);
 
 export default router;

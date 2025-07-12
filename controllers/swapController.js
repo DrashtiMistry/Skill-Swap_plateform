@@ -1,10 +1,27 @@
 import SwapRequest from '../models/SwapRequest.js';
 
 export const sendSwap = async (req, res) => {
-  const swap = await SwapRequest.create(req.body);
-  res.status(201).json(swap);
-};
+  try {
+    const { toUser, offeredSkill, requestedSkill } = req.body;
 
+    if (!toUser || !offeredSkill || !requestedSkill) {
+      return res.status(400).json({ msg: 'Missing required fields' });
+    }
+
+    const swap = await SwapRequest.create({
+      fromUser: req.user._id,
+      toUser,
+      offeredSkill,
+      requestedSkill,
+      status: 'pending'
+    });
+
+    res.status(201).json(swap);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: 'Failed to send swap request' });
+  }
+};
 export const getSwaps = async (req, res) => {
   const swaps = await SwapRequest.find({ $or: [{ fromUser: req.params.userId }, { toUser: req.params.userId }] })
     .populate('fromUser toUser', 'name email');
