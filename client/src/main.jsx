@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import React ,{ StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -9,6 +9,8 @@ import HomePage from './pages/HomePage.jsx'
 import Profile from './Pages/Profile.jsx'
 import SwapRequest from './Pages/SwapRequest.jsx'
 import SwapRequestDetails from './Pages/SwapRequestDetails.jsx'
+import { ToastContainer } from 'react-toastify'
+
 
 const routes =  createBrowserRouter([
     {
@@ -45,6 +47,7 @@ const routes =  createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <ToastContainer />
     <RouterProvider router={routes} /> 
   </StrictMode>,
 )
